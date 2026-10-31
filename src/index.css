@@ -1,0 +1,254 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* DARK PROFESSIONAL THEME */
+    --bg-main: #02040a;
+    --bg-bento: #0a0d18;
+    --bg-inner-box: #050711;
+    --text-primary: #ffffff;
+    --text-secondary: #cbd5e1;
+    --text-muted: #c084fc;
+    --text-accent: #f43f5e;
+    
+    --grid-line: rgba(168, 85, 247, 0.05);
+  }
+
+  .light-theme {
+    /* LIGHT PROFESSIONAL THEME */
+    --bg-main: #f8fafc;
+    --bg-bento: #ffffff;
+    --bg-inner-box: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #7e22ce;
+    --text-accent: #d946ef;
+    
+    --grid-line: rgba(168, 85, 247, 0.08);
+  }
+}
+
+/* Keyframe Rotasi Border Presisi */
+@keyframes spinBorder {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace, ui-sans-serif, system-ui;
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ambient Background Glow */
+.ambient-glow {
+  background: radial-gradient(circle, rgba(217,70,239,0.12) 0%, rgba(139,92,246,0.1) 35%, rgba(6,182,212,0.08) 70%, rgba(2,4,10,0) 100%);
+  transition: background 0.5s ease;
+  filter: blur(100px);
+}
+
+/* Grid Background */
+.cyber-grid {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  transition: background-image 0.5s ease;
+}
+
+/* Bento Card Frame Base */
+.bento-card {
+  position: relative;
+  background-color: var(--bg-bento);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  padding: 2px;
+  box-shadow: 0 0 15px rgba(217, 70, 239, 0.15), 
+              0 0 30px rgba(6, 182, 212, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.2s ease, background-color 0.5s ease;
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400%;
+  height: 400%;
+  background: conic-gradient(
+    from 0deg,
+    #d946ef,
+    #8b5cf6,
+    #ec4899,
+    #06b6d4,
+    #1e1b4b,
+    #d946ef
+  );
+  animation: spinBorder 8s linear infinite;
+  z-index: 0;
+}
+
+.bento-card::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background-color: var(--bg-bento);
+  border-radius: calc(1.5rem - 2px);
+  z-index: 1;
+  transition: background-color 0.5s ease;
+}
+
+.bento-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.bento-card:hover {
+  box-shadow: 0 0 25px rgba(236, 72, 153, 0.45), 
+              0 0 50px rgba(6, 182, 212, 0.35);
+  transform: translateY(-4px) scale(1.01);
+}
+
+.bento-card:hover::before {
+  animation-duration: 2s;
+}
+
+/* 1. DARK GREY OUTLINE UNTUK PREVIEW CANVAS */
+.dark-grey-card {
+  position: relative;
+  background-color: #060913;
+  border: 1.5px solid #1e293b; /* Dark Grey Border (slate-800) */
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark-grey-card:hover {
+  border-color: #334155; /* Slightly lighter dark grey on hover (slate-700) */
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
+}
+
+/* 2. GLOWING MAGENTA BUTTONS UNTUK TIMELINE CONTROLS */
+.btn-magenta-glow {
+  background-color: #d946ef;
+  color: #02040a;
+  font-weight: 800;
+  box-shadow: 0 0 12px rgba(217, 70, 239, 0.5), 0 0 24px rgba(236, 72, 153, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-magenta-glow:hover {
+  background-color: #f43f5e;
+  box-shadow: 0 0 18px rgba(244, 63, 94, 0.7), 0 0 32px rgba(217, 70, 239, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Button Import Magenta Glow Outline */
+.btn-magenta-outline {
+  background-color: rgba(217, 70, 239, 0.1);
+  color: #f472b6;
+  border: 1px solid rgba(217, 70, 239, 0.5);
+  box-shadow: 0 0 8px rgba(217, 70, 239, 0.2);
+  transition: all 0.2s ease;
+}
+
+.btn-magenta-outline:hover {
+  background-color: rgba(217, 70, 239, 0.25);
+  color: #ffffff;
+  border-color: #ec4899;
+  box-shadow: 0 0 14px rgba(236, 72, 153, 0.5);
+}
+
+@media (max-width: 768px) {
+  .cyber-grid {
+    background-size: 24px 24px;
+  }
+
+  .bento-card {
+    border-radius: 1.25rem;
+  }
+
+  .bento-card::before {
+    width: 600%;
+    height: 600%;
+  }
+
+  .bento-card::after {
+    border-radius: calc(1.25rem - 2px);
+  }
+
+  .ambient-glow {
+    width: 300px !important;
+    height: 300px !important;
+    filter: blur(80px);
+  }
+}
+
+.text-theme-primary {
+  color: var(--text-primary);
+  transition: color 0.5s ease;
+}
+
+.text-theme-secondary {
+  color: var(--text-secondary);
+  transition: color 0.5s ease;
+}
+
+.text-theme-muted {
+  color: var(--text-muted);
+  transition: color 0.5s ease;
+}
+
+.text-theme-accent {
+  color: var(--text-accent);
+  transition: color 0.5s ease;
+}
+
+.bg-inner-box {
+  background-color: var(--bg-inner-box);
+  transition: background-color 0.5s ease;
+}
+
+/* Entry Animations */
+@keyframes cyberZoomObscure {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(8px) contrast(150%);
+  }
+  50% {
+    filter: blur(2px) contrast(110%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px) contrast(100%);
+  }
+}
+
+.anim-cyber-entry {
+  animation: cyberZoomObscure 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+/* Sembunyikan panah atas/bawah untuk Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Sembunyikan panah atas/bawah untuk Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
